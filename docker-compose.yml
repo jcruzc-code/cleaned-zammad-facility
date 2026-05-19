@@ -57,6 +57,7 @@ x-shared:
       ZAMMAD_PROCESS_DELAYED_COMMUNICATION_INBOUND_JOBS_WORKER_THREADS:
       ZAMMAD_OTRS_IMPORT_READ_TIMEOUT:
       ZAMMAD_OTRS_IMPORT_TOTAL_TIMEOUT:
+      VERSION:
 
       # ZAMMAD_SESSION_JOBS_CONCURRENT is deprecated, please use ZAMMAD_PROCESS_SESSIONS_JOBS_WORKERS instead.
       ZAMMAD_SESSION_JOBS_CONCURRENT:
@@ -73,8 +74,8 @@ x-shared:
       context: .
       dockerfile: Dockerfile.zammad
       args:
-        VERSION: ${VERSION:-7.0.1-0040}
-    image: cleaned-zammad-facility:${VERSION:-7.0.1-0040}
+        VERSION: ${ZAMMAD_IMAGE_TAG:-7.0.1-0040}
+    image: cleaned-zammad-facility:${ZAMMAD_IMAGE_TAG:-7.0.1-0040}
     restart: ${RESTART:-always}
     volumes:
       - zammad-backup:/var/tmp/zammad:ro  # needed for waiting on restore operations
