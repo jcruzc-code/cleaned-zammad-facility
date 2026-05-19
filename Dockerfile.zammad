@@ -9,12 +9,27 @@ COPY logo.png /tmp/cleaned-logo.png
 RUN set -eux; \
     mkdir -p /opt/zammad/public/cleaned; \
     cp /tmp/cleaned-logo.png /opt/zammad/public/cleaned/logo.png; \
+    cat > /opt/zammad/public/cleaned/force_light.js <<'EOF' \
+;(function () { \
+  function forceLight() { \
+    try { \
+      localStorage.setItem('theme', 'light'); \
+      document.documentElement.dataset.theme = 'light'; \
+      document.documentElement.style.colorScheme = 'light'; \
+      if (document.body) document.body.setAttribute('data-force-light', 'true'); \
+    } catch (e) {} \
+  } \
+  forceLight(); \
+  document.addEventListener('DOMContentLoaded', forceLight); \
+  try { \
+    new MutationObserver(forceLight).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class', 'style'] }); \
+  } catch (e) {} \
+  setInterval(forceLight, 750); \
+})(); \
+EOF
+RUN set -eux; \
     if [ -f /opt/zammad/app/views/layouts/application.html.erb ]; then \
-      sed -i "s/document.documentElement.dataset.theme = 'dark';/localStorage.setItem('theme','light'); document.documentElement.dataset.theme = 'light';/g" /opt/zammad/app/views/layouts/application.html.erb; \
+      grep -q '/cleaned/force_light.js' /opt/zammad/app/views/layouts/application.html.erb || \
+      sed -i '/<%= csrf_meta_tags %>/i\  <script nonce="<%= content_security_policy_nonce %>" src="/cleaned/force_light.js"></script>' /opt/zammad/app/views/layouts/application.html.erb; \
     fi; \
-    for file in /opt/zammad/public/assets/application-*.css; do \
-      if [ -f "$file" ]; then \
-        cat /tmp/cleaned_light.css >> "$file"; \
-        gzip -kf "$file"; \
-      fi; \
-    done
+    find /opt/zammad/public/assets -type f -name "*.css" -print -exec sh -c 'cat /tmp/cleaned_light.css >> "$1"; rm -f "$1.gz" "$1.br"; gzip -kf "$1"' sh {} \;
