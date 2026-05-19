@@ -105,7 +105,7 @@ services:
 
   zammad-init:
     <<: *zammad-service
-    command: ["zammad-init"]
+    command: ["/bin/sh", "-lc", "unset VERSION; exec zammad-init"]
     depends_on:
       - zammad-postgresql
     restart: on-failure
