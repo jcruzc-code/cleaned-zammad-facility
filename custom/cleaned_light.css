@@ -1,0 +1,121 @@
+/* Cleaned Facility Desk - Tema claro */
+
+/* Fondo general */
+html,
+body,
+#app,
+.app,
+.main,
+.content,
+.content-wrapper {
+  background: #f4f7fb !important;
+}
+
+/* Login */
+.login,
+.login-page,
+.page-login,
+.authentication,
+.authentication-page {
+  background: #f4f7fb !important;
+}
+
+/* Caja de login */
+.login .box,
+.login-box,
+.authentication-box,
+.form-box,
+.modal {
+  background: #ffffff !important;
+  border-radius: 18px !important;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.16) !important;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1f2937 !important;
+  border-radius: 8px !important;
+}
+
+/* Textos */
+body,
+input,
+textarea,
+select,
+button {
+  color: #1f2937 !important;
+}
+
+/* Botones */
+button,
+.btn,
+.btn--primary,
+.button-primary,
+input[type="submit"],
+button[type="submit"] {
+  border-radius: 10px !important;
+}
+
+/* Botón principal */
+.btn--primary,
+.button-primary,
+button.primary,
+input[type="submit"],
+button[type="submit"] {
+  background-color: #0057b8 !important;
+  border-color: #0057b8 !important;
+  color: #ffffff !important;
+}
+
+/* Links */
+a {
+  color: #0057b8 !important;
+}
+
+/* Sidebar / navegación */
+.sidebar,
+.navigation,
+.main-menu,
+.menu,
+.nav {
+  background: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+/* Header */
+.header,
+.topbar,
+.navbar {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Paneles, tablas, tarjetas */
+.card,
+.panel,
+.box,
+.content-box,
+.table,
+.list,
+.ticketZoom,
+.overview {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Badges */
+.badge,
+.label {
+  border-radius: 999px !important;
+}
+
+/* Powered by Zammad más discreto */
+.poweredBy,
+.powered-by,
+.footer {
+  opacity: 0.35 !important;
+}
