@@ -23,6 +23,13 @@ html[data-theme="light"] {
   --border-alt: #dbe2ea !important;
 }
 
+/* Forzar claro en cualquier nodo que quede en dark */
+html[data-theme="dark"] *,
+html[data-theme="dark"] *::before,
+html[data-theme="dark"] *::after {
+  color-scheme: light !important;
+}
+
 /* Fondo general */
 html,
 body,
@@ -146,6 +153,16 @@ a {
   position: relative !important;
 }
 
+/* Zammad usa SVG sprite para logo en varias vistas */
+svg.icon-logo,
+svg.icon-logotype,
+.logo svg,
+.brand-logo svg,
+.sidebar-logo svg,
+.splash .icon-logo {
+  display: none !important;
+}
+
 .logo img,
 .brand-logo img,
 .js-logo img,
@@ -169,6 +186,17 @@ img[alt*="Zammad"] {
   background: url("/cleaned/logo.png") center/contain no-repeat !important;
 }
 
+/* Cabecera lateral: mostrar logo cleaned aunque el original sea SVG */
+.logo a::before,
+.brand-logo a::before {
+  content: "" !important;
+  display: block !important;
+  width: 170px !important;
+  height: 46px !important;
+  margin: 6px auto !important;
+  background: url("/cleaned/logo.png") center/contain no-repeat !important;
+}
+
 /* Footer de marca Zammad fuera */
 .poweredBy,
 .powered-by,
@@ -180,4 +208,14 @@ a[href*="zammad.com"] {
   opacity: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
+}
+
+/* Ocultar toggle de modo oscuro en menú usuario */
+.user-menu [for*="dark"],
+.user-menu [for*="theme"],
+.user-menu .js-darkmode,
+.user-menu .js-theme,
+.user-menu .is-darkmode,
+.user-menu .is-themeSwitch {
+  display: none !important;
 }
