@@ -1,5 +1,28 @@
 /* Cleaned Facility Desk - Tema claro */
 
+/* Forzar tema claro aunque el navegador prefiera dark */
+:root,
+html,
+body,
+html[data-theme="dark"],
+html[data-theme="light"] {
+  color-scheme: light !important;
+  --background-primary: #f4f7fb !important;
+  --background-primary-alt: #eef3f9 !important;
+  --background-secondary: #ffffff !important;
+  --background-secondary-hover: #f8fafc !important;
+  --background-tertiary: #ffffff !important;
+  --background-quaternary: #ffffff !important;
+  --background-popover: #ffffff !important;
+  --text-normal: #1f2937 !important;
+  --text-muted: #64748b !important;
+  --text-link: #0057b8 !important;
+  --interactive-primary: #1f2937 !important;
+  --interactive-muted: #64748b !important;
+  --border: #e5e7eb !important;
+  --border-alt: #dbe2ea !important;
+}
+
 /* Fondo general */
 html,
 body,
@@ -153,4 +176,8 @@ img[alt*="Zammad"] {
 .footer .poweredBy,
 a[href*="zammad.com"] {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }

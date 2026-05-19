@@ -9,6 +9,9 @@ COPY logo.png /tmp/cleaned-logo.png
 RUN set -eux; \
     mkdir -p /opt/zammad/public/cleaned; \
     cp /tmp/cleaned-logo.png /opt/zammad/public/cleaned/logo.png; \
+    if [ -f /opt/zammad/app/views/layouts/application.html.erb ]; then \
+      sed -i "s/document.documentElement.dataset.theme = 'dark';/localStorage.setItem('theme','light'); document.documentElement.dataset.theme = 'light';/g" /opt/zammad/app/views/layouts/application.html.erb; \
+    fi; \
     for file in /opt/zammad/public/assets/application-*.css; do \
       if [ -f "$file" ]; then \
         cat /tmp/cleaned_light.css >> "$file"; \
