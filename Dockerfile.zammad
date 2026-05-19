@@ -1,0 +1,14 @@
+ARG VERSION=7.0.1-0040
+FROM ghcr.io/zammad/zammad:${VERSION}
+
+USER root
+
+COPY custom/cleaned_light.css /tmp/cleaned_light.css
+
+RUN set -eux; \
+    for file in /opt/zammad/public/assets/application-*.css; do \
+      if [ -f "$file" ]; then \
+        cat /tmp/cleaned_light.css >> "$file"; \
+        gzip -kf "$file"; \
+      fi; \
+    done
