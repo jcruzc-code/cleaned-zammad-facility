@@ -4,8 +4,11 @@ FROM ghcr.io/zammad/zammad:${VERSION}
 USER root
 
 COPY custom/cleaned_light.css /tmp/cleaned_light.css
+COPY logo.png /tmp/cleaned-logo.png
 
 RUN set -eux; \
+    mkdir -p /opt/zammad/public/cleaned; \
+    cp /tmp/cleaned-logo.png /opt/zammad/public/cleaned/logo.png; \
     for file in /opt/zammad/public/assets/application-*.css; do \
       if [ -f "$file" ]; then \
         cat /tmp/cleaned_light.css >> "$file"; \

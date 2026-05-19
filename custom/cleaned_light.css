@@ -60,7 +60,7 @@ button[type="submit"] {
   border-radius: 10px !important;
 }
 
-/* Botón principal */
+/* Boton principal */
 .btn--primary,
 .button-primary,
 button.primary,
@@ -76,7 +76,7 @@ a {
   color: #0057b8 !important;
 }
 
-/* Sidebar / navegación */
+/* Sidebar / navegacion */
 .sidebar,
 .navigation,
 .main-menu,
@@ -113,9 +113,44 @@ a {
   border-radius: 999px !important;
 }
 
-/* Powered by Zammad más discreto */
+/* Branding: reemplazar logo de Zammad por Cleaned */
+.logo,
+.brand-logo,
+.js-logo,
+.login-logo,
+.logo-wrapper,
+.logo-box {
+  position: relative !important;
+}
+
+.logo img,
+.brand-logo img,
+.js-logo img,
+.login-logo img,
+img[src*="zammad"],
+img[alt*="Zammad"] {
+  opacity: 0 !important;
+}
+
+.logo::after,
+.brand-logo::after,
+.js-logo::after,
+.login-logo::after,
+.logo-wrapper::after,
+.logo-box::after {
+  content: "" !important;
+  display: block !important;
+  width: 220px !important;
+  height: 72px !important;
+  margin: 0 auto !important;
+  background: url("/cleaned/logo.png") center/contain no-repeat !important;
+}
+
+/* Footer de marca Zammad fuera */
 .poweredBy,
 .powered-by,
-.footer {
-  opacity: 0.35 !important;
+.footer .powered,
+.footer .poweredBy,
+a[href*="zammad.com"] {
+  display: none !important;
 }
