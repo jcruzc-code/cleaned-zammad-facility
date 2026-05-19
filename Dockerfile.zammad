@@ -4,30 +4,13 @@ FROM ghcr.io/zammad/zammad:${ZAMMAD_IMAGE_TAG}
 USER root
 
 COPY custom/cleaned_light.css /tmp/cleaned_light.css
+COPY custom/force_light.js /tmp/force_light.js
 COPY logo.png /tmp/cleaned-logo.png
 
 RUN set -eux; \
     mkdir -p /opt/zammad/public/cleaned; \
     cp /tmp/cleaned-logo.png /opt/zammad/public/cleaned/logo.png; \
-    cat > /opt/zammad/public/cleaned/force_light.js <<'EOF' \
-;(function () { \
-  function forceLight() { \
-    try { \
-      localStorage.setItem('theme', 'light'); \
-      document.documentElement.dataset.theme = 'light'; \
-      document.documentElement.style.colorScheme = 'light'; \
-      if (document.body) document.body.setAttribute('data-force-light', 'true'); \
-    } catch (e) {} \
-  } \
-  forceLight(); \
-  document.addEventListener('DOMContentLoaded', forceLight); \
-  try { \
-    new MutationObserver(forceLight).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class', 'style'] }); \
-  } catch (e) {} \
-  setInterval(forceLight, 750); \
-})(); \
-EOF
-RUN set -eux; \
+    cp /tmp/force_light.js /opt/zammad/public/cleaned/force_light.js; \
     if [ -f /opt/zammad/app/views/layouts/application.html.erb ]; then \
       grep -q '/cleaned/force_light.js' /opt/zammad/app/views/layouts/application.html.erb || \
       sed -i '/<%= csrf_meta_tags %>/i\  <script nonce="<%= content_security_policy_nonce %>" src="/cleaned/force_light.js"></script>' /opt/zammad/app/views/layouts/application.html.erb; \
